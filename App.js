@@ -5,7 +5,6 @@ import * as Location from 'expo-location';
 
 export default function App() {
   
-  // const [location, setLocation] = useState(null);
   const [region, setRegion] = useState({latitude: 0, longitude: 0, latitudeDelta: 0.0322, longitudeDelta: 0.0221});
   const [marker, setMarker] = useState({latitude: 0, longitude: 0});
   const [address, setAddress] = useState('');
@@ -23,7 +22,7 @@ export default function App() {
     })
   }
 
-/*   useEffect(() => (async () => {
+    useEffect(() => (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert('No permission to get location')
@@ -31,9 +30,11 @@ export default function App() {
       }
 
       let location = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.High });
-      setLocation(location);
-      console.log('Location:', location)
-    })(), []); */
+      let longitude = location.coords.longitude
+      let latitude = location.coords.latitude
+      setRegion({ latitude, longitude, latitudeDelta: 0.0322, longitudeDelta: 0.0221 })
+      setMarker({ latitude, longitude })
+    })(), []);
 
   return (
     <View style={styles.container}>
